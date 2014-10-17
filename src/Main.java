@@ -15,6 +15,6 @@ public class Main {
         GetQuery g = new GetQuery();
         String json;
         json = g.get(url, q);
-        json = "";
+        JsonUtils.parser(json);
     }
 }
