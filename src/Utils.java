@@ -19,7 +19,7 @@ public class Utils {
 
     public static String stringReader(){
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return br.readLine();
         }catch (Exception e){
             System.out.println("Ошибка при вводе строки!");
@@ -32,6 +32,8 @@ public class Utils {
         while(val<0) {
             try {
                 val = Integer.parseInt(stringReader());
+                if(val<0)
+                    System.out.println("Введено отрицательное число!Введите число >0");
             } catch (Exception e) {
                 val = -1;
                 System.out.println("Ошибка при вводе целого положительного числа!");
