@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,5 +15,28 @@ public class Utils {
             b.append((char)c);
         }
         return b.toString();
+    }
+
+    public static String stringReader(){
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "Cp866"));
+            return br.readLine();
+        }catch (Exception e){
+            System.out.println("Ошибка при вводе строки!");
+        }
+        return null;
+    }
+
+    public static int integerInput(){
+        int val = -1;
+        while(val<0) {
+            try {
+                val = Integer.parseInt(stringReader());
+            } catch (Exception e) {
+                val = -1;
+                System.out.println("Ошибка при вводе целого положительного числа!");
+            }
+        }
+        return val;
     }
 }
