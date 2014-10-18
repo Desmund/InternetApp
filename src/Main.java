@@ -25,25 +25,21 @@ public class Main {
                 System.out.println("Введите слово для перевода");
                 text = Utils.stringReader();
             }
-            QueryString q = new QueryString()
-                    .add("key", Constants.KEY)
-                    .add("lang", lang)
-                    .add("text", text);
-            //todo исправить строку 47.
-            GetQuery.get(Constants.URL,q,new GetQuery.IServerAnswer() {
+            Dictionary.translate(text,lang,new Dictionary.ITranslate() {
                 @Override
                 public void succsess(String str) {
-                    String s = JsonUtils.parser(str);
-                    if(s!=null) {
-                        System.out.println("Перевод слова " + text + " : " +s);
+                    if(str!=null) {
+                        System.out.println("Перевод слова " + text + " : " +str);
                     }else
                         System.out.println("Нет перевода для слова " + text);
                 }
+
                 @Override
                 public void error(String err) {
-                    System.out.println("Ошибка:" + err.toString());
+                    System.out.println("Ошибка: " + err.toString());
                 }
             });
+            //todo исправить строку 47.
             System.out.println("0 - для выхода" + '\n' + "Любое положительное число - для продолжения");
             finish = Utils.integerInput();
             text = null;
