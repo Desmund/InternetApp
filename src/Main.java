@@ -2,10 +2,9 @@
  * Created by Denis on 17.10.2014.
  */
 public class Main {
-    private static String key = "dict.1.1.20141015T173845Z.3c9e418789463529.ff0dbbfe1344ced63658bdad3c92284237de4362";
-    private static String lang = "en-ru";
+
     private static String text = null;
-    private static String url = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup";
+    private static String lang;
 
     public static void main(String[] args) throws Exception{
         int finish = -1;
@@ -17,9 +16,9 @@ public class Main {
                 direction = Utils.integerInput();
             }while(direction>1||direction<0);
             switch (direction){
-                case 0 : lang = "ru-en";
+                case 0 : lang = Constants.LANG_EN_RU;
                     break;
-                case 1 : lang = "en-ru";
+                case 1 : lang = Constants.LANG_EN_RU;
                     break;
             }
             while(text==null) {
@@ -27,17 +26,24 @@ public class Main {
                 text = Utils.stringReader();
             }
             QueryString q = new QueryString()
-                    .add("key", key)
+                    .add("key", Constants.KEY)
                     .add("lang", lang)
                     .add("text", text);
-            GetQuery g = new GetQuery();
-            String json;
-            json = g.get(url, q);
-            json = JsonUtils.parser(json);
-            if(json!=null) {
-                System.out.println("Перевод слова " + text + " : " +json);
-            }else
-                System.out.println("Нет перевода для слова " + text);
+            //todo исправить строку 47.
+            GetQuery.get(Constants.URL,q,new GetQuery.IServerAnswer() {
+                @Override
+                public void succsess(String str) {
+                    String s = JsonUtils.parser(str);
+                    if(s!=null) {
+                        System.out.println("Перевод слова " + text + " : " +s);
+                    }else
+                        System.out.println("Нет перевода для слова " + text);
+                }
+                @Override
+                public void error(String err) {
+                    System.out.println("Ошибка:" + err.toString());
+                }
+            });
             System.out.println("0 - для выхода" + '\n' + "Любое положительное число - для продолжения");
             finish = Utils.integerInput();
             text = null;
