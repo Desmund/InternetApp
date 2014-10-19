@@ -2,6 +2,8 @@ import Const.Constants;
 import Server.Dictionary;
 import Utils.InputOutputUtils;
 
+import java.util.ArrayList;
+
 /**
  * Created by Denis on 17.10.2014.
  */
@@ -31,11 +33,12 @@ public class Main {
             }
             Dictionary.translate(text, lang, new Dictionary.ITranslate() {
                 @Override
-                public void success(String str) {
+                public void success(ArrayList<String> str) {
                     //todo добавить еще один саксес
-                    //todo добавить эрей и переводить в строку
-                    if (str != null) {
-                        System.out.println("Перевод слова " + text + " : " + str);
+                    if (str.size() != 0) {
+                        System.out.println("Перевод слова " + text + " : ");
+                        for(String s:str)
+                            System.out.println(s);
                     } else
                         System.out.println("Нет перевода для слова " + text);
                 }

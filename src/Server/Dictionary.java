@@ -6,13 +6,14 @@ import Server.QueryString;
 import Utils.JsonUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 /**
  * Created by Denis on 18.10.2014.
  */
 public class Dictionary {
     public interface ITranslate{
-        public void success(String str);
+        public void success(ArrayList<String> str);
         public void error(String err);
     }
     public static void translate(String word, String lang, final ITranslate iTranslate){
@@ -28,7 +29,7 @@ public class Dictionary {
         Queries.get(Constants.URL, q, new Queries.IServerAnswer() {
             @Override
             public void success(String str) {
-                String s = null;
+                ArrayList<String> s = null;
                 try {
                     s = JsonUtils.parser(str);
                     iTranslate.success(s);
