@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Dictionary {
     public interface ITranslate{
         public void success(ArrayList<String> str);
+        public void success();
         public void error(String err);
     }
     public static void translate(String word, String lang, final ITranslate iTranslate){
@@ -32,9 +33,12 @@ public class Dictionary {
                 ArrayList<String> s = null;
                 try {
                     s = JsonUtils.parser(str);
-                    iTranslate.success(s);
+                    if(s.size()!=0)
+                        iTranslate.success(s);
+                    else
+                        iTranslate.success();
                 } catch (Exception e) {
-                    iTranslate.error("нет перевода");
+                    iTranslate.error("Такого слова в словаре нет!");
                 }
             }
 

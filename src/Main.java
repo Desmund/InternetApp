@@ -22,7 +22,7 @@ public class Main {
                 direction = InputOutputUtils.integerInput();
             }while(direction>1||direction<0);
             switch (direction){
-                case 0 : lang = Constants.LANG_EN_RU;
+                case 0 : lang = Constants.LANG_RU_EN;
                     break;
                 case 1 : lang = Constants.LANG_EN_RU;
                     break;
@@ -34,14 +34,15 @@ public class Main {
             Dictionary.translate(text, lang, new Dictionary.ITranslate() {
                 @Override
                 public void success(ArrayList<String> str) {
-                    //todo добавить еще один саксес
-                    if (str.size() != 0) {
                         System.out.println("Перевод слова " + text + " : ");
                         for(String s:str)
                             System.out.println(s);
-                    } else
-                        System.out.println("Нет перевода для слова " + text);
                 }
+                @Override
+                public void success() {
+                    System.out.println("Нет перевода для слова " + text);
+                }
+
                 @Override
                 public void error(String err) {
                     System.out.println("Ошибка: " + err.toString());
