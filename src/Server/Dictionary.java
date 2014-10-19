@@ -1,3 +1,10 @@
+package Server;
+
+import Const.Constants;
+import Server.Queries;
+import Server.QueryString;
+import Utils.JsonUtils;
+
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -5,7 +12,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class Dictionary {
     public interface ITranslate{
-        public void succsess(String str);
+        public void success(String str);
         public void error(String err);
     }
     public static void translate(String word, String lang, final ITranslate iTranslate){
@@ -18,17 +25,18 @@ public class Dictionary {
         } catch (UnsupportedEncodingException e) {
             iTranslate.error(e.getMessage());
         }
-        GetQuery.get(Constants.URL,q,new GetQuery.IServerAnswer() {
+        Queries.get(Constants.URL, q, new Queries.IServerAnswer() {
             @Override
-            public void succsess(String str) {
+            public void success(String str) {
                 String s = null;
                 try {
                     s = JsonUtils.parser(str);
-                    iTranslate.succsess(s);
+                    iTranslate.success(s);
                 } catch (Exception e) {
                     iTranslate.error("нет перевода");
                 }
             }
+
             @Override
             public void error(String err) {
                 iTranslate.error(err);

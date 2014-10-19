@@ -1,3 +1,5 @@
+package Utils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +8,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Denis on 17.10.2014.
  */
-public class Utils {
+public class InputOutputUtils {
     public static String readStreamToString(InputStream in,String encoding) throws IOException{
         StringBuffer b = new StringBuffer();
         InputStreamReader r = new InputStreamReader(in, encoding);

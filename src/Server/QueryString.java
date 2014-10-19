@@ -1,4 +1,4 @@
-/**
+package Server; /**
  * Created by Denis on 17.10.2014.
  */
 import java.io.UnsupportedEncodingException;

@@ -1,3 +1,5 @@
+package Const;
+
 /**
  * Created by Denis on 18.10.2014.
  */

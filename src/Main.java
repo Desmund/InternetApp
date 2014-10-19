@@ -1,3 +1,7 @@
+import Const.Constants;
+import Server.Dictionary;
+import Utils.InputOutputUtils;
+
 /**
  * Created by Denis on 17.10.2014.
  */
@@ -13,7 +17,7 @@ public class Main {
             do{
                 System.out.println("Выберите направление перевода");
                 System.out.println("0 - ru->en" + '\n' + "1 - en->ru");
-                direction = Utils.integerInput();
+                direction = InputOutputUtils.integerInput();
             }while(direction>1||direction<0);
             switch (direction){
                 case 0 : lang = Constants.LANG_EN_RU;
@@ -23,25 +27,25 @@ public class Main {
             }
             while(text==null) {
                 System.out.println("Введите слово для перевода");
-                text = Utils.stringReader();
+                text = InputOutputUtils.stringReader();
             }
-            Dictionary.translate(text,lang,new Dictionary.ITranslate() {
+            Dictionary.translate(text, lang, new Dictionary.ITranslate() {
                 @Override
-                public void succsess(String str) {
-                    if(str!=null) {
-                        System.out.println("Перевод слова " + text + " : " +str);
-                    }else
+                public void success(String str) {
+                    //todo добавить еще один саксес
+                    //todo добавить эрей и переводить в строку
+                    if (str != null) {
+                        System.out.println("Перевод слова " + text + " : " + str);
+                    } else
                         System.out.println("Нет перевода для слова " + text);
                 }
-
                 @Override
                 public void error(String err) {
                     System.out.println("Ошибка: " + err.toString());
                 }
             });
-            //todo исправить строку 47.
-            System.out.println("0 - для выхода" + '\n' + "Любое положительное число - для продолжения");
-            finish = Utils.integerInput();
+            System.out.println("Обработка информации..." + '\n' + "0 - для выхода" + '\n' + "Для продолжения работы нажмите любое положительное число");
+            finish = InputOutputUtils.integerInput();
             text = null;
         }while (finish!=0);
     }
