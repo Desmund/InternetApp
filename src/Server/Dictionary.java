@@ -1,9 +1,7 @@
 package Server;
 
 import Const.Constants;
-import Server.Queries;
-import Server.QueryString;
-import Utils.JsonUtils;
+import Utils.JsonUtils.JsonTranslate;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -27,12 +25,12 @@ public class Dictionary {
         } catch (UnsupportedEncodingException e) {
             iTranslate.error(e.getMessage());
         }
-        Queries.get(Constants.URL, q, new Queries.IServerAnswer() {
+        Queries.get(Constants.URL_TRANSLATE, q, new Queries.IServerAnswer() {
             @Override
             public void success(String str) {
                 ArrayList<String> s = null;
                 try {
-                    s = JsonUtils.parser(str);
+                    s = JsonTranslate.parser(str);
                     if(s.size()!=0)
                         iTranslate.success(s);
                     else

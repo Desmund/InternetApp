@@ -1,14 +1,12 @@
-package Utils;
+package Utils.JsonUtils;
 
 import com.google.gson.*;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
  * Created by Denis on 17.10.2014.
  */
-public class JsonUtils {
+public class JsonTranslate {
     public static ArrayList<String> parser(String str) throws Exception{
         ArrayList<String> b = new ArrayList<String>();
         JsonParser jsonParser = new JsonParser();
