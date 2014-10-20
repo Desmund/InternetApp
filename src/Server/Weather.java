@@ -1,13 +1,18 @@
 package Server;
 
 import Const.Constants;
+import Structures.WeatherStruct;
+import Utils.JsonUtils.JsonTranslate;
+import Utils.JsonUtils.JsonWeather;
+
+import java.util.ArrayList;
 
 /**
  * Created by Denis on 20.10.2014.
  */
 public class Weather {
     public interface IWeather{
-        public void success();
+        public void success(WeatherStruct ws);
         public void error(String err);
     }
     public static void find(String country, String iso, final IWeather iWeather){
@@ -21,7 +26,15 @@ public class Weather {
         Queries.get(Constants.URL_WEATHER,query, new Queries.IServerAnswer(){
             @Override
             public void success(String str) {
-                //todo обработка json строки
+                try {
+                    WeatherStruct ws = JsonWeather.parser(str);
+                    if(ws!=null)
+                        iWeather.success(ws);
+                    else
+                        iWeather.error("Произошла ошибка!Попробуйте проверить введенные вами данные!");
+                } catch (Exception e) {
+                    iWeather.error("Произошла ошибка!");
+                }
             }
 
             @Override

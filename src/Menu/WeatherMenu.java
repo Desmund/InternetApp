@@ -2,6 +2,8 @@ package Menu;
 
 import Const.Constants;
 import Server.Dictionary;
+import Server.Weather;
+import Structures.WeatherStruct;
 import Utils.InputOutputUtils;
 import java.util.ArrayList;
 
@@ -19,7 +21,17 @@ public class WeatherMenu {
         Dictionary.translate(country, Constants.LANG_RU_EN, new Dictionary.ITranslate() {
             @Override
             public void success(ArrayList<String> str) {
-                country = str.get(0);
+                Weather.find(str.get(0),iso,new Weather.IWeather() {
+                    @Override
+                    public void success(WeatherStruct ws) {
+
+                    }
+
+                    @Override
+                    public void error(String err) {
+
+                    }
+                });
             }
 
             @Override
