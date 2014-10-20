@@ -1,13 +1,14 @@
 package Structures;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Denis on 20.10.2014.
  */
 public class WeatherStruct {
     private double lon;
     private double lat;
-    private long sunrise;
-    private long sunset;
     private String weather;
     private double temp;
     private double tempMin;
@@ -17,11 +18,9 @@ public class WeatherStruct {
     private double windSpeed;
     private double windDeg;
 
-    public WeatherStruct(double lon, double lat, long sunrise, long sunset, String weather, double temp, double tempMin, double tempMax, double pressure, byte humidity, double windSpeed, double windDeg) {
+    public WeatherStruct(double lon, double lat, String weather, double temp, double tempMin, double tempMax, double pressure, byte humidity, double windSpeed, double windDeg) {
         this.lon = lon;
         this.lat = lat;
-        this.sunrise = sunrise;
-        this.sunset = sunset;
         this.weather = weather;
         this.temp = temp;
         this.tempMin = tempMin;
@@ -49,22 +48,6 @@ public class WeatherStruct {
 
     public void setLat(double lat) {
         this.lat = lat;
-    }
-
-    public long getSunrise() {
-        return sunrise;
-    }
-
-    public void setSunrise(long sunrise) {
-        this.sunrise = sunrise;
-    }
-
-    public long getSunset() {
-        return sunset;
-    }
-
-    public void setSunset(long sunset) {
-        this.sunset = sunset;
     }
 
     public String getWeather() {
@@ -129,5 +112,20 @@ public class WeatherStruct {
 
     public void setWindDeg(double windDeg) {
         this.windDeg = windDeg;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat f = new SimpleDateFormat("hh.mm.ss");
+        return  "Широта=" + lon + '\n' +
+                "Долгота=" + lat + '\n' +
+                "Погода=" + weather +  '\n' +
+                "Темп.(в цельсиях)=" + (int)(temp-273.15) + '\n' +
+                "Мин. темп. (в цельсиях)=" + (int)(tempMin-273.15) + '\n' +
+                "Макс. темп. (в цельсиях)=" + (int)(tempMax-273.15) + '\n' +
+                "Давление (hPa)=" + pressure + '\n' +
+                "Влажность (%)=" + humidity + '\n' +
+                "Скор. ветра (м/с)=" + windSpeed + '\n' +
+                "Направл. ветра (в градусах)=" + windDeg;
     }
 }

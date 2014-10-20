@@ -20,9 +20,6 @@ public class JsonWeather {
         obj = (JsonObject) obj.get("coord");
         ws.setLon(obj.get("lon").getAsDouble());
         ws.setLat(obj.get("lat").getAsDouble());
-        obj = (JsonObject) ((JsonObject) el).get("sys");
-        ws.setSunrise(obj.get("sunrise").getAsLong());
-        ws.setSunset(obj.get("sunset").getAsLong());
         arr = (JsonArray) ((JsonObject) el).get("weather");
         obj = (JsonObject)arr.get(0);
         ws.setWeather(obj.get("description").getAsString());
@@ -31,7 +28,7 @@ public class JsonWeather {
         ws.setTempMin(obj.get("temp_min").getAsDouble());
         ws.setTempMax(obj.get("temp_max").getAsDouble());
         ws.setHumidity(obj.get("humidity").getAsByte());
-        ws.setPressure(obj.get("pressure").getAsByte());
+        ws.setPressure(obj.get("pressure").getAsDouble());
         obj = (JsonObject) ((JsonObject) el).get("wind");
         ws.setWindSpeed(obj.get("speed").getAsDouble());
         ws.setWindDeg(obj.get("deg").getAsDouble());
