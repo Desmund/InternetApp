@@ -19,7 +19,7 @@ public class JsonUtils {
             obj = (JsonObject) ((JsonArray) obj.get("tr")).get(0);
             b.add(obj.get("text").toString());
             arr = (JsonArray) obj.get("syn");
-            if (arr.size()!=0) {
+            if (arr!=null) {
                 for (int i = 0; i < arr.size(); i++) {
                     obj = (JsonObject) arr.get(i);
                     b.add(obj.get("text").toString());
