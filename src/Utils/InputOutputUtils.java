@@ -29,6 +29,16 @@ public class InputOutputUtils {
         return null;
     }
 
+    public static char charReader(){
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            return (char)br.read();
+        }catch (Exception e){
+            System.out.println("Ошибка при вводе строки!");
+        }
+        return ' ';
+    }
+
     public static int integerInput(){
         int val = -1;
         while(val<0) {
